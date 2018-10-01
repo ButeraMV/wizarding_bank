@@ -50,4 +50,15 @@ class BankTest < Minitest::Test
     assert_equal ({'Chase' => 250}), person.bank_accounts
     assert_equal 500, person.cash
   end
+
+  def test_for_insufficient_funds
+    bank = Bank.new('Chase')
+    person = Person.new('Minerva', 750)
+    bank.open_account(person)
+    bank.deposit(person, 500)
+    bank.withdrawal(person, 750)
+
+    assert_equal ({'Chase' => 500}), person.bank_accounts
+    assert_equal 250, person.cash
+  end
 end

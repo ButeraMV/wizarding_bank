@@ -21,4 +21,13 @@ class Bank
     end
   end
 
+  def withdrawal(person, amount)
+    if person.bank_accounts[bank_name] >= amount
+      person.bank_accounts[bank_name] -= amount.to_i
+      person.cash += amount.to_i
+      puts "#{person.name} has withdrawn #{amount} galleons. Balance: #{person.bank_accounts[bank_name]}"
+    else
+      puts "Insufficient funds."
+    end
+  end
 end
