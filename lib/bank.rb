@@ -20,4 +20,5 @@ class Bank
       puts "#{person.name} does not have enough cash to perform this deposit."
     end
   end
+
 end
