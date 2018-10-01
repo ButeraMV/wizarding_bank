@@ -17,5 +17,6 @@ class Person
     @name = name
     @cash = cash
     @bank_accounts = {}
+    puts "#{name} has been created with #{cash} galleons in cash."
   end
 end
