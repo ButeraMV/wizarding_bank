@@ -22,11 +22,21 @@ class BankTest < Minitest::Test
 
   def test_bank_can_accept_deposits
     bank = Bank.new('Chase')
-    person = Person.new('Minerva', 500)
+    person = Person.new('Minerva', 750)
     bank.open_account(person)
     bank.deposit(person, 250)
 
     assert_equal ({'Chase' => 250}), person.bank_accounts
+    assert_equal 500, person.cash
+  end
+
+  def test_deposit_fails_not_enough_cash
+    bank = Bank.new('Chase')
+    person = Person.new('Minerva', 250)
+    bank.open_account(person)
+    bank.deposit(person, 500)
+
+    assert_equal ({'Chase' => 0}), person.bank_accounts
     assert_equal 250, person.cash
   end
 end

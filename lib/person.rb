@@ -9,9 +9,9 @@
 # The person class should store a person’s cash level, which banks they have an account with, and their balances at each bank.
 
 class Person
-  attr_accessor :bank_accounts
-  attr_reader :name,
-              :cash
+  attr_accessor :bank_accounts,
+                :cash
+  attr_reader :name
 
   def initialize(name, cash)
     @name = name
