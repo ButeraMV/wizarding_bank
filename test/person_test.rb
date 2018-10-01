@@ -17,4 +17,10 @@ class PersonTest < Minitest::Test
 
     assert_equal 1000, person.cash
   end
+
+  def test_person_is_created_with_empty_bank
+    person = Person.new("Minerva", 1000)
+
+    assert_empty person.bank_accounts
+  end
 end
