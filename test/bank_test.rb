@@ -61,4 +61,40 @@ class BankTest < Minitest::Test
     assert_equal ({'Chase' => 500}), person.bank_accounts
     assert_equal 250, person.cash
   end
+
+  def test_bank_cant_transfer_without_existing
+    bank = Bank.new('Chase')
+    bank2 = Bank.new('Wells Fargo')
+    person = Person.new('Minerva', 750)
+    bank.open_account(person)
+    bank.deposit(person, 500)
+    bank.transfer(person, bank2, 250)
+
+    assert_equal ({'Chase' => 250}), person.bank_accounts
+  end
+
+  def test_bank_can_transfer_with_existing
+    bank = Bank.new('Chase')
+    bank2 = Bank.new('Wells Fargo')
+    person = Person.new('Minerva', 750)
+    bank.open_account(person)
+    bank2.open_account(person)
+    bank.deposit(person, 500)
+    bank.transfer(person, bank2, 250)
+
+    assert_equal ({'Chase' => 250, 'Wells Fargo' => 250}), person.bank_accounts
+  end
+
+  def test_total_cash
+    bank = Bank.new('Chase')
+    person = Person.new('Minerva', 750)
+    person2 = Person.new('Luna', 500)
+    bank.open_account(person)
+    bank.open_account(person2)
+    bank.deposit(person, 500)
+    bank.deposit(person2, 250)
+    result = bank.total_cash
+
+    assert_equal 750, result
+  end
 end
